@@ -13,12 +13,12 @@
         <!-- Job Company -->
         <TextView
             android:id="@+id/job_role"
+            style="@style/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Android Developer"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <!-- Job Role and Icon -->
         <LinearLayout
@@ -29,18 +29,18 @@
 
             <TextView
                 android:id="@+id/job_company"
+                style="@style/textColor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Facebook"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/job_icon"
+                style="@style/image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_mage"
                 android:contentDescription="Job Icon" />
         </LinearLayout>
 
@@ -53,9 +53,9 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/salary_icon"
+                style="@style/money"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_money"
                 android:contentDescription="salary" />
 
             <LinearLayout
@@ -67,19 +67,19 @@
 
                 <TextView
                     android:id="@+id/salary_label"
+                    style="@style/textColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Salary"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/salary_range"
+                    style="@style/textColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$1400 - $2000"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -92,9 +92,9 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/location_icon"
+                style="@style/location"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_location"
                 android:contentDescription="Location" />
 
             <LinearLayout
@@ -106,42 +106,42 @@
 
                 <TextView
                     android:id="@+id/location_label"
+                    style="@style/textColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Location"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/location_name"
+                    style="@style/textColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New York, USA"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
         <!-- Job Description Label -->
         <TextView
             android:id="@+id/job_description_label"
+            style="@style/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Job Description"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <!-- Job Description Content -->
         <TextView
             android:id="@+id/job_description_content"
+            style="@style/textColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="This is where the job description will go..."
-            android:textSize="14sp"
-            android:textColor="@color/black"/>
+            android:textSize="14sp" />
 
         <!-- MaterialButton for login with circular corners matching the EditTexts and same height -->
         <com.google.android.material.button.MaterialButton

@@ -15,5 +15,6 @@ data class Job(
     val jobMode: String = "Remote",
     val jobPostedTime: String = "",
     val jobRequirement: String = "",
-    val jobType: String = "Full Time"
+    val jobType: String = "Full Time",
+    val jobImage : String = ""
 )

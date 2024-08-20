@@ -1,6 +1,5 @@
 package com.talhaatif.jobportalclient
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,14 +7,6 @@ import com.talhaatif.jobportalclient.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-//    private lateinit var noteAdapter: NoteAdapter
-//    private val notesList = mutableListOf<Note>()
-//    private val filteredList = mutableListOf<Note>()
-//    private val util = Util()
-//    private lateinit var datePickers: DatePickers
-//    private var currentQuery: String = ""
-//    private var currentStartDate: Date? = null
-//    private var currentEndDate: Date? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

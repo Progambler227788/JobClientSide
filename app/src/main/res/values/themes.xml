@@ -20,9 +20,33 @@
 
     </style>
 
+    <style name="textColor">
+
+        <item name="android:textColor">@color/edit_text_background_dark</item>
+
+    </style>
+
     <style name="settings">
 
         <item name="android:src">@drawable/ic_settings</item>
+
+    </style>
+
+    <style name="money">
+
+        <item name="android:src">@drawable/ic_money</item>
+
+    </style>
+
+    <style name="image">
+
+        <item name="android:src">@drawable/ic_mage</item>
+
+    </style>
+
+    <style name="location">
+
+        <item name="android:src">@drawable/ic_location</item>
 
     </style>
 

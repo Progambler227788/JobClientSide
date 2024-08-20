@@ -5,12 +5,15 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.talhaatif.jobportalclient.ApplyJobsActivity
 import com.talhaatif.jobportalclient.R
 import com.talhaatif.jobportalclient.firebase.Variables
 import com.talhaatif.jobportalclient.model.Job
+import de.hdodenhof.circleimageview.CircleImageView
 
 class JobAdapter(private var jobs: List<Job>, private val activity: Activity) :
     RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
@@ -29,6 +32,10 @@ class JobAdapter(private var jobs: List<Job>, private val activity: Activity) :
         holder.jobTypeTextView.text = job.jobType
         holder.jobModeTextView.text = job.jobMode
         holder.salaryRangeTextView.text = "$${job.jobSalaryStartRange} - $${job.jobSalaryEndRange}"
+        Glide.with(holder.jobImage.context)
+            .load(job.jobImage)
+            .placeholder(R.drawable.cartoon_happy_eyes)
+            .into(holder.jobImage)
         // Fetch and set the job status
         Variables.db.collection("users").document(Variables.auth.currentUser!!.uid)
             .get()
@@ -65,5 +72,6 @@ class JobAdapter(private var jobs: List<Job>, private val activity: Activity) :
         val jobModeTextView: TextView = itemView.findViewById(R.id.job_mode)
         val salaryRangeTextView: TextView = itemView.findViewById(R.id.salary_range)
         val jobStatus : TextView = itemView.findViewById(R.id.status)
+        val jobImage : CircleImageView = itemView.findViewById(R.id.company_logo)
     }
 }

@@ -26,6 +26,7 @@ firebaseFirestore = "25.0.0"
 firebaseStorage = "21.0.0"
 shimmer = "0.5.0"
 circleimageview = "3.1.0"
+firebaseMessaging = "24.0.0"
 
 
 [libraries]
@@ -54,6 +55,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.firebase.storage.ktx)
     implementation(libs.firebase.storage)
     implementation (libs.glide)
+    implementation(libs.firebase.messaging)
     annotationProcessor (libs.compiler)
     implementation (libs.shimmer)
     implementation(libs.circleimageview)

@@ -3,6 +3,7 @@ package com.talhaatif.jobportalclient
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
@@ -62,12 +63,25 @@ class ApplyJobsActivity : AppCompatActivity() {
                         val jobTitle = document.getString("jobTitle")
                         val jobCompany = document.getString("jobCompany")
                         val jobDescription = document.getString("jobDescription")
+                        val jobSalaryStart = document.getString("jobSalaryStartRange")
+                        val jobSalaryEnd = document.getString("jobSalaryEndRange")
+                        val location = document.getString("jobLocation")
+                        val logo = document.getString("jobImage")
+
                         // Populate other fields as needed
 
                         // Update UI with job details
                         binding.jobRole.text = jobTitle
                         binding.jobCompany.text = jobCompany
                         binding.jobDescriptionContent.text = jobDescription
+                        binding.salaryRange.text = "$${jobSalaryStart} - $${jobSalaryEnd}"
+                        binding.locationName.text = location
+                        // Load the company logo if it's available
+                        Glide.with(binding.jobIcon)
+                            .load(logo)
+                            .placeholder(R.drawable.cartoon_happy_eyes)
+                            .into(binding.jobIcon)
+
                         // Set other fields as needed
                     } else {
                         Toast.makeText(this, "Job not found.", Toast.LENGTH_SHORT).show()

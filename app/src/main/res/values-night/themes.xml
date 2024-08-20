@@ -25,12 +25,37 @@
 
     </style>
 
+    <style name="textColor">
+
+        <item name="android:textColor">@color/edit_text_background_light</item>
+
+    </style>
+
     <style name="settings">
 
         <item name="android:src">@drawable/ic_settings_night</item>
 
     </style>
 
+
+    <style name="money">
+
+        <item name="android:src">@drawable/ic_money_night</item>
+
+    </style>
+
+    <style name="image">
+
+        <item name="android:src">@drawable/ic_image_night</item>
+
+    </style>
+
+
+    <style name="location">
+
+        <item name="android:src">@drawable/ic_location_night</item>
+
+    </style>
 
     <style name="filter">
 
