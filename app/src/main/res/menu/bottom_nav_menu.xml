@@ -11,5 +11,9 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon = "@drawable/chat_users"
+        android:title ="Chat"/>
 
 </menu>

@@ -29,6 +29,9 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".ChatScreen"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreenActivity"
             android:exported="true" >
             <intent-filter>
