@@ -14,16 +14,17 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@drawable/bg_receive"
-        android:visibility="gone"
         android:text="Message Text"
         android:textColor="@android:color/white" />
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:id="@+id/voiceContainer"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="gone"
         android:padding="8dp"
-        android:gravity="center_vertical">
+       >
 
         <!-- Play/Pause Button -->
         <ImageButton
