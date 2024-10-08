@@ -16,6 +16,7 @@
         android:background="@drawable/bg_receive"
         android:text="Message Text"
         android:textColor="@android:color/white" />
+
     <LinearLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"

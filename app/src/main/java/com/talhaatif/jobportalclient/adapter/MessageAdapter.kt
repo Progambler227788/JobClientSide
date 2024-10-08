@@ -1,7 +1,8 @@
 package com.talhaatif.jobportalclient.adapter
 
-import android.media.MediaPlayer
+import  android.media.MediaPlayer
 import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +16,19 @@ import com.talhaatif.jobportalclient.model.Message
 import java.io.IOException
 
 class MessageAdapter(private var messages: List<Message>, private val currentUID: String) :
+
+
+// we need to use different media player instances separately for each voice message
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var handler: Handler = Handler()
 
-    class MessageViewHolder(val binding: ItemMessageBinding) : RecyclerView.ViewHolder(binding.root)
+    class MessageViewHolder(val binding: ItemMessageBinding) : RecyclerView.ViewHolder(binding.root){
+
+        var mediaPlayer: MediaPlayer? = null
+        var handler: Handler = Handler(Looper.getMainLooper()) // Handler for updating SeekBar
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val binding = ItemMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -56,26 +64,26 @@ class MessageAdapter(private var messages: List<Message>, private val currentUID
             holder.binding.voiceContainer.visibility = View.GONE
 
         } else if (message.messageType == "voice") {
-            // Hide the text message and show the voice message UI
             holder.binding.textMessage.visibility = View.GONE
             holder.binding.voiceContainer.visibility = View.VISIBLE
 
             holder.binding.btnPlayVoiceNote.setOnClickListener {
-                if (mediaPlayer?.isPlaying == true) {
-                    mediaPlayer?.stop()
-                    mediaPlayer?.reset()
+                if (holder.mediaPlayer?.isPlaying == true) {
+                    holder.mediaPlayer?.stop()
+                    holder.mediaPlayer?.reset()
                     holder.binding.btnPlayVoiceNote.setImageResource(R.drawable.ic_play)
+                    holder.handler.removeCallbacksAndMessages(null) // Remove any pending updates
                 } else {
-                    playVoiceMessage(holder, message.messageText) // messageText contains the audio URL
+                    playVoiceMessage(holder, message.messageText)
                     holder.binding.btnPlayVoiceNote.setImageResource(R.drawable.ic_pause)
                 }
             }
 
-            // Set up SeekBar for voice note
+            // SeekBar handling
             holder.binding.seekBarVoiceNote.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    if (fromUser) {
-                        mediaPlayer?.seekTo(progress)
+                    if (fromUser && holder.mediaPlayer != null) {
+                        holder.mediaPlayer?.seekTo(progress)
                     }
                 }
 
@@ -86,35 +94,36 @@ class MessageAdapter(private var messages: List<Message>, private val currentUID
     }
 
     private fun playVoiceMessage(holder: MessageViewHolder, audioUrl: String) {
-        mediaPlayer?.reset()
-        mediaPlayer = MediaPlayer()
+        holder.mediaPlayer?.release() // Release previous MediaPlayer if any
+        holder.mediaPlayer = MediaPlayer()
 
         try {
-            mediaPlayer?.setDataSource(audioUrl)
-            mediaPlayer?.prepare()
-            mediaPlayer?.start()
+            holder.mediaPlayer?.setDataSource(audioUrl)
+            holder.mediaPlayer?.prepare()
+            holder.mediaPlayer?.start()
 
             // Set SeekBar max value to the audio duration
-            holder.binding.seekBarVoiceNote.max = mediaPlayer!!.duration
+            holder.binding.seekBarVoiceNote.max = holder.mediaPlayer!!.duration
 
             // Update the duration TextView
-            val totalDuration = mediaPlayer!!.duration / 1000 // Convert to seconds
+            val totalDuration = holder.mediaPlayer!!.duration / 1000
             holder.binding.txtVoiceNoteDuration.text = formatDuration(totalDuration)
 
             // Update SeekBar as audio plays
-            handler.postDelayed(object : Runnable {
+            holder.handler.postDelayed(object : Runnable {
                 override fun run() {
-                    if (mediaPlayer != null) {
-                        holder.binding.seekBarVoiceNote.progress = mediaPlayer!!.currentPosition
-                        handler.postDelayed(this, 1000)
+                    if (holder.mediaPlayer != null) {
+                        holder.binding.seekBarVoiceNote.progress = holder.mediaPlayer!!.currentPosition
+                        holder.handler.postDelayed(this, 1000)
                     }
                 }
             }, 1000)
 
-            // On completion of audio playback
-            mediaPlayer?.setOnCompletionListener {
+            // Handle audio completion
+            holder.mediaPlayer?.setOnCompletionListener {
                 holder.binding.btnPlayVoiceNote.setImageResource(R.drawable.ic_play)
                 holder.binding.seekBarVoiceNote.progress = 0
+                holder.handler.removeCallbacksAndMessages(null) // Stop SeekBar updates
             }
 
         } catch (e: IOException) {
@@ -126,5 +135,12 @@ class MessageAdapter(private var messages: List<Message>, private val currentUID
         val minutes = seconds / 60
         val remainingSeconds = seconds % 60
         return String.format("%d:%02d", minutes, remainingSeconds)
+    }
+
+    // Adapter's `onViewRecycled` method to ensure that media resources are properly cleaned up.
+    override fun onViewRecycled(holder: MessageViewHolder) {
+        holder.mediaPlayer?.release()
+        holder.handler.removeCallbacksAndMessages(null) // Stop any pending updates for the recycled view
+        super.onViewRecycled(holder)
     }
 }

@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.os.Handler
 import android.view.WindowManager
+import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.firestoreSettings
 import com.talhaatif.jobportalclient.databinding.ActivitySplashScreenBinding
 import com.talhaatif.jobportalclient.firebase.Util
 
@@ -20,6 +23,13 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         FirebaseApp.initializeApp(this)
+
+        // Enable Firestore offline persistence
+        val db = Firebase.firestore
+        val settings = firestoreSettings {
+            isPersistenceEnabled = true
+        }
+        db.firestoreSettings = settings
 
         // This is used to hide the status bar and make
         // the splash screen as a full screen activity.

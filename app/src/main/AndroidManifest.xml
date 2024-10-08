@@ -20,6 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotesApplication"
         tools:targetApi="31" >
+
+<!--        android:exported false mean we can't communicate with other apps like share activity from certain activity that has false-->
         <activity
             android:name=".ApplyJobsActivity"
             android:exported="false" />
@@ -36,8 +38,9 @@
             android:name=".SplashScreenActivity"
             android:exported="true" >
             <intent-filter>
+<!--                here main is entry point of app-->
                 <action android:name="android.intent.action.MAIN" />
-
+<!--telling starting activity -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

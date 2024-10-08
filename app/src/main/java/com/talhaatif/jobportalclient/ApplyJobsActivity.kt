@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
+import com.talhaatif.jobportalclient.adapter.ViewPagerAdapter
 import com.talhaatif.jobportalclient.firebase.Variables
 import com.talhaatif.jobportalclient.databinding.ActivityApplyJobsBinding
 
@@ -73,9 +74,16 @@ class ApplyJobsActivity : AppCompatActivity() {
                         // Update UI with job details
                         binding.jobRole.text = jobTitle
                         binding.jobCompany.text = jobCompany
-                        binding.jobDescriptionContent.text = jobDescription
+
                         binding.salaryRange.text = "$${jobSalaryStart} - $${jobSalaryEnd}"
                         binding.locationName.text = location
+
+                        val companyOverview = "We are a leading company in the tech industry, known for innovation and a vibrant workplace. Our team is dedicated to pushing the boundaries of technology to deliver cutting-edge solutions."
+                        val missionVision = "Our mission is to create groundbreaking products that shape the future of technology. Our vision is to empower businesses and individuals to achieve their full potential through our solutions."
+                        val totalEmployees = "500+ Employees worldwide."
+
+
+                        setupViewPager(jobDescription ?: "No description available", companyOverview, missionVision, totalEmployees)
                         // Load the company logo if it's available
                         Glide.with(binding.jobIcon)
                             .load(logo)
@@ -91,6 +99,12 @@ class ApplyJobsActivity : AppCompatActivity() {
                     Toast.makeText(this, "Failed to fetch job details: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+
+    private fun setupViewPager(jobDescription: String, companyOverview: String, missionVision: String, totalEmployees: String) {
+        val adapter = ViewPagerAdapter(supportFragmentManager, jobDescription, companyOverview, missionVision, totalEmployees)
+        binding.viewPager.adapter = adapter
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 
     private fun applyForJob(jobId: String?, uid: String, cv: String) {

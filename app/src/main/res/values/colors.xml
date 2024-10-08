@@ -13,7 +13,7 @@
 
     <color name="shimmer_color">#686262</color>
 
-    <color name="grey">#BCBABA</color>
+    <color name="grey">#D7D5D5</color>
     <!-- Start color of the shimmer gradient -->
     <color name="shimmer_start_color">#998F8F</color>
 
